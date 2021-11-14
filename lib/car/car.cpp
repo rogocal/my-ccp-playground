@@ -3,7 +3,7 @@
 #include <iostream>
 #include <json/json.h>
 
-Car::Car(const std::string &name) : name(name) {}
+Car::Car(const std::string &_name) : name(_name) {}
 Car::Car() : Car("N/A") {}
 
 Car Car::FromFile(std::string path) {

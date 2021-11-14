@@ -21,7 +21,7 @@ public:
 class Car {
 public:
   Car();
-  explicit Car(const std::string &name);
+  explicit Car(const std::string &_name);
   static Car FromFile(std::string path);
   void printInfo() const;
   void start();

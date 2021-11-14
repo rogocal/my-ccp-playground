@@ -1,10 +1,12 @@
 cmake_minimum_required(VERSION 3.21)
 
-set(PROJECT_NAME "car")
-set(PROJECT_VERSION 1.1.0)
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(JSONCPP jsoncpp)
+
+set(PROJECT_VERSION 1.2.0)
 
 project(
-  ${PROJECT_NAME}
+  car
   VERSION ${PROJECT_VERSION}
   DESCRIPTION "Car Library"
   LANGUAGES C CXX)
@@ -15,7 +17,7 @@ set(MY_LIB_SOURCES "car.cpp")
 # Create SHARED Library Object
 add_library(${PROJECT_NAME} SHARED ${MY_LIB_SOURCES})
 
-target_link_libraries(${PROJECT_NAME} jsoncpp)
+target_link_libraries(${PROJECT_NAME} jsoncpp project_warnings project_options)
 
 # Configure SHARED Library Object
 set_target_properties(
