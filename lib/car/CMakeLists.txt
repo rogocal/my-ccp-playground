@@ -1,7 +1,7 @@
-cmake_minimum_required(VERSION 3.6 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.21)
 
-set(PROJECT_NAME "libcar")
-set(PROJECT_VERSION 1.0.0)
+set(PROJECT_NAME "car")
+set(PROJECT_VERSION 1.1.0)
 
 project(
   ${PROJECT_NAME}
