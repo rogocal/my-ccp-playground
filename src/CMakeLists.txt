@@ -1,23 +1,38 @@
-cmake_minimum_required(VERSION 3.21)
+# project(constructors)
+
+cmake_minimum_required(VERSION 3.6 FATAL_ERROR)
+
+set(PROJECT_NAME "constructors")
+
+# Project Version
+set(PROJECT_VERSION 1.0.0)
+
+# Configure Project
+project(
+  ${PROJECT_NAME}
+  VERSION ${PROJECT_VERSION}
+  DESCRIPTION "My Executable"
+  LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_C_COMPILER "gcc")
-set(CMAKE_CXX_COMPILER "g++")
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-set(CMAKE_BUILD_TYPE Debug)
 
-project(
-  Constructors
-  VERSION 0.0.1
-  LANGUAGES C CXX)
-add_executable(${PROJECT_NAME} constructors.cpp car.cpp)
-#add_compile_options(${PROJECT_NAME} -Wall -pedantic -O3)
+# Make Build Libs & Executables to be position-independent, like SHARED libs.
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-set(MY_FLAGS "-Wall -pedantic -g")
-set(CMAKE_C_FLAGS_DEBUG ${MY_FLAGS})
-set(CMAKE_CXX_FLAGS_DEBUG ${MY_FLAGS})
 
-# set_source_files_properties(${CMAKE_CURRENT_SOURCE_DIR}/*.cpp PROPERTIES
-# COMPILE_FLAGS "-std=c++17 -Wall -pedantic -O3")
+message(STATUS "Lib = ${mylib}")
 
-target_link_libraries(${PROJECT_NAME} jsoncpp)
+# Add Executable-Object
+add_executable(${PROJECT_NAME} constructors.cpp)
+
+# Configure Executable-Object
+set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME "shared_library_example"
+                                       RUNTIME_OUTPUT_DIRECTORY "${BIN_DIR}")
+
+
+#target_link_libraries(${PROJECT_NAME} jsoncpp)
+
+# Include MyLib Public-Headers
+include_directories("../lib/car")
+
+target_link_libraries(${PROJECT_NAME} libcar)

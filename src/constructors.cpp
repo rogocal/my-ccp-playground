@@ -7,9 +7,9 @@ int main() {
   std::vector<Car> list;
   bool initOK = false;
   try {
-    list.push_back(Car::FromFile("../data/myCar.json"));
+    list.push_back(Car::FromFile("../../data/myCar.json"));
     list.push_back(Car("Renault"));
-    list.push_back(Car::FromFile("../data/otherCar.json"));
+    list.push_back(Car::FromFile("../../data/otherCar.json"));
     list.push_back(Car());
     initOK = true;
   } catch (CarException &e) {
