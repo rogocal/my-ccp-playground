@@ -28,7 +28,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Get dependencies
-      run: run: |
+      run: |
         sudo apt-get -y install doxygen graphviz
 
     - name: Configure CMake
