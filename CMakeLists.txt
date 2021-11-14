@@ -14,11 +14,14 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Link this 'library' to use the warnings specified in CompilerWarnings.cmake
 add_library(project_warnings INTERFACE)
-# standard compiler warnings include(cmake/CompilerWarnings.cmake)
-# set_project_warnings(project_warnings)
+# standard compiler warnings 
+include(cmake/CompilerWarnings.cmake)
+set_project_warnings(project_warnings)
 
-# sanitizer options if supported by compiler include(cmake/Sanitizers.cmake)
-# enable_sanitizers(project_options)
+# sanitizer options if supported by compiler 
+add_library(project_options INTERFACE)
+include(cmake/Sanitizers.cmake)
+enable_sanitizers(project_options)
 
 # enable doxygen
 include(cmake/Doxygen.cmake)
@@ -35,7 +38,7 @@ if(ENABLE_TESTING)
   message(
     "Building Tests. Be sure to check out test/constexpr_tests for constexpr testing"
   )
-  add_subdirectory(test)
+  #add_subdirectory(test)
 endif()
 
 set(BIN_DIR "${CMAKE_SOURCE_DIR}/bin/${PLATFORM_DIR}/${BUILD_TYPE_DIR}")
