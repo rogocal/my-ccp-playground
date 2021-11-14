@@ -4,7 +4,7 @@
 
 /**
  * @brief Car exceptions
- * 
+ *
  */
 class CarException : public std::exception {
 public:
@@ -16,7 +16,7 @@ public:
 
 /**
  * @brief Car class, handle all cars
- * 
+ *
  */
 class Car {
 public:
@@ -25,6 +25,8 @@ public:
   static Car FromFile(std::string path);
   void printInfo() const;
   void start();
+
+  std::string getName() const { return name; }
 
 private:
   const std::string name;

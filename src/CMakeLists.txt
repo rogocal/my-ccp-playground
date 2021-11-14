@@ -22,8 +22,8 @@ add_executable(${PROJECT_NAME} constructors.cpp)
 set_target_properties(
   ${PROJECT_NAME} PROPERTIES OUTPUT_NAME "constructors" 
                              RUNTIME_OUTPUT_DIRECTORY "${BIN_DIR}")
+                             #VERSION ${PROJECT_VERSION})
 
-# Include MyLib Public-Headers
 include_directories("../lib/car")
 
-target_link_libraries(${PROJECT_NAME} car)
+target_link_libraries(${PROJECT_NAME} car project_options project_warnings)
