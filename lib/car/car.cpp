@@ -3,7 +3,7 @@
 #include <iostream>
 #include <json/json.h>
 
-Car::Car(std::string name) : name(name) { status = "stopped"; }
+Car::Car(const std::string &name) : name(name) {}
 Car::Car() : Car("N/A") {}
 
 Car Car::FromFile(std::string path) {
@@ -16,7 +16,7 @@ Car Car::FromFile(std::string path) {
   }
   return Car(name);
 }
-void Car::printInfo() {
-  std::cout << "Car " << name << " status: " << status << '\n';
+void Car::printInfo() const{
+  std::cout << "Car 1.2 " << name << " status: " << status << '\n';
 }
 void Car::start() { status = "running"; }

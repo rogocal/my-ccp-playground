@@ -19,8 +19,9 @@ message(STATUS "Lib = car")
 add_executable(${PROJECT_NAME} constructors.cpp)
 
 # Configure Executable-Object
-set_target_properties(${PROJECT_NAME} PROPERTIES OUTPUT_NAME "constructors"
-                                                 OUTPUT_DIRECTORY "${BIN_DIR}")
+set_target_properties(
+  ${PROJECT_NAME} PROPERTIES OUTPUT_NAME "constructors" 
+                             RUNTIME_OUTPUT_DIRECTORY "${BIN_DIR}")
 
 # Include MyLib Public-Headers
 include_directories("../lib/car")
