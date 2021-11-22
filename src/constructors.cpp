@@ -6,6 +6,7 @@
 int main() {
   std::vector<Car> list;
   bool initOK = false;
+  Car::printVersion();
   try {
     list.push_back(Car::FromFile("../data/myCar.json"));
     list.push_back(Car("Renault"));

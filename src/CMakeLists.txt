@@ -13,7 +13,7 @@ project(
 # Make Build Libs & Executables to be position-independent, like SHARED libs.
 # set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-message(STATUS "Lib = car")
+message(STATUS "Configuring car library")
 include(ExternalProject)
 # ExternalProject_Add( car GIT_REPOSITORY
 # https://github.com/rogocal/my-cpp-playground-lib.git GIT_TAG v0.1.0
@@ -22,17 +22,15 @@ ExternalProject_Add(
   car
   PREFIX ${CMAKE_CURRENT_BINARY_DIR}/${libTLS}
   GIT_REPOSITORY https://github.com/rogocal/my-cpp-playground-lib.git
-  GIT_TAG v0.1.0
+  GIT_TAG 1.3.0
   DOWNLOAD_NO_PROGRESS ON
   CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_CURRENT_BINARY_DIR}/car
-  CMAKE_ARGS -DUSE_SHARED_LIBRARY:BOOL=ON)
+  CMAKE_ARGS -DENABLE_TESTING=OFF)
 
 ExternalProject_Get_Property(car install_dir)
 include_directories(${install_dir}/car/include)
-
-add_library(linkcar SHARED IMPORTED)
-message(install dir = ${install_dir})
-set_target_properties(linkcar PROPERTIES IMPORTED_LOCATION ${install_dir}/car/lib/libcar.so)
+add_library(libcar SHARED IMPORTED)
+set_target_properties(libcar PROPERTIES IMPORTED_LOCATION ${install_dir}car/lib/libcar.so)
 
 # Add Executable-Object
 add_executable(${PROJECT_NAME} constructors.cpp)
@@ -44,4 +42,4 @@ set_target_properties(
                                                         "${BIN_DIR}")
 # VERSION ${PROJECT_VERSION})
 
-target_link_libraries(${PROJECT_NAME} linkcar project_options project_warnings)
+target_link_libraries(${PROJECT_NAME} libcar project_options project_warnings)
