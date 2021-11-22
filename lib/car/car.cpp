@@ -16,7 +16,7 @@ Car Car::FromFile(std::string path) {
   }
   return Car(name);
 }
-void Car::printInfo() const{
+void Car::printInfo() const {
   std::cout << "Car 1.2 " << name << " status: " << status << '\n';
 }
 void Car::start() { status = "running"; }

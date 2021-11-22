@@ -36,7 +36,7 @@ add_subdirectory(lib)
 add_subdirectory(src)
 
 # option(BUILD_SHARED_LIBS "Enable compilation of shared libraries" OFF)
-option(ENABLE_TESTING "Enable Test Builds" ON)
+option(ENABLE_TESTING "Enable Test Builds" OFF)
 
 if(ENABLE_TESTING)
   enable_testing()
