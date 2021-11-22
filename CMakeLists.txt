@@ -32,7 +32,6 @@ include(cmake/StaticAnalyzers.cmake)
 
 set(BIN_DIR "${CMAKE_SOURCE_DIR}/bin/${PLATFORM_DIR}/${BUILD_TYPE_DIR}")
 
-add_subdirectory(lib)
 add_subdirectory(src)
 
 # option(BUILD_SHARED_LIBS "Enable compilation of shared libraries" OFF)

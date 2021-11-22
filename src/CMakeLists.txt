@@ -14,16 +14,34 @@ project(
 # set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 message(STATUS "Lib = car")
+include(ExternalProject)
+# ExternalProject_Add( car GIT_REPOSITORY
+# https://github.com/rogocal/my-cpp-playground-lib.git GIT_TAG v0.1.0
+# INSTALL_COMMAND cmake -E echo "Skipping install step.")
+ExternalProject_Add(
+  car
+  PREFIX ${CMAKE_CURRENT_BINARY_DIR}/${libTLS}
+  GIT_REPOSITORY https://github.com/rogocal/my-cpp-playground-lib.git
+  GIT_TAG v0.1.0
+  DOWNLOAD_NO_PROGRESS ON
+  CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=${CMAKE_CURRENT_BINARY_DIR}/car
+  CMAKE_ARGS -DUSE_SHARED_LIBRARY:BOOL=ON)
+
+ExternalProject_Get_Property(car install_dir)
+include_directories(${install_dir}/car/include)
+
+add_library(linkcar SHARED IMPORTED)
+message(install dir = ${install_dir})
+set_target_properties(linkcar PROPERTIES IMPORTED_LOCATION ${install_dir}/car/lib/libcar.so)
 
 # Add Executable-Object
 add_executable(${PROJECT_NAME} constructors.cpp)
+add_dependencies(${PROJECT_NAME} car)
 
 # Configure Executable-Object
 set_target_properties(
-  ${PROJECT_NAME} PROPERTIES OUTPUT_NAME "constructors" 
-                             RUNTIME_OUTPUT_DIRECTORY "${BIN_DIR}")
-                             #VERSION ${PROJECT_VERSION})
+  ${PROJECT_NAME} PROPERTIES OUTPUT_NAME "constructors" RUNTIME_OUTPUT_DIRECTORY
+                                                        "${BIN_DIR}")
+# VERSION ${PROJECT_VERSION})
 
-include_directories("../lib/car")
-
-target_link_libraries(${PROJECT_NAME} car project_options project_warnings)
+target_link_libraries(${PROJECT_NAME} linkcar project_options project_warnings)
